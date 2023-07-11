@@ -1,13 +1,12 @@
 import tkinter as tk
 
-
 #  def cadastrar(self):
 
 class Banco:
 
     def __init__(self, master: tk.Tk, numero, nome):
         self.janelaLogin = master
-        self.janelaLogin.title('Banco Santander')
+        self.janelaLogin.title('Poggie Bank')
         self.janelaLogin.geometry('500x500')
         self.janelaLogin.resizable(width=False, height=False)
         self.janelaLogin.__numero = numero
@@ -44,4 +43,5 @@ numero = 1
 nome = ''
 banco = tk.Tk()
 janela = Banco(banco, numero, nome)
+banco.wm_iconbitmap('poggiebank.ico')
 banco.mainloop()
