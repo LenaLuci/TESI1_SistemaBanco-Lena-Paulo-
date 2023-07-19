@@ -5,10 +5,13 @@ from tkinter import ttk
 
 class Cliente:
 
+    def disable_event(self):
+        pass
+
     def sair(self):
         resposta = messagebox.askyesno('Logout', 'Deseja mesmo finalizar a sessão?')
         if resposta is True:
-            self.janelacliente.destroy()
+            self.janelacliente.withdraw()
 
     def __init__(self, master: Tk, nome, endereco, cpf):
         self.janelacliente = master
@@ -38,6 +41,8 @@ class Cliente:
 
         btn_sair = Button(self.framecliente, text="Sair", command=self.sair)
         btn_sair.place(x=140, y=500)
+
+        self.janelacliente.protocol("WM_DELETE_WINDOW", self.disable_event)
 
 
 app = Tk()

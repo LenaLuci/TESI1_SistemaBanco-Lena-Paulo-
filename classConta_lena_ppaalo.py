@@ -4,6 +4,7 @@ from tkinter import messagebox
 
 
 class Conta:
+
     def editar(self):
         item = self.tvw.selection()
         if len(item) != 1:
@@ -28,7 +29,7 @@ class Conta:
             self.ent_email.grid(row=2, column=1)
             self.ent_email.insert('end', valores[2])
             btn_confirmar = Button(self.top_editar, text='Confirmar', command=self.confirmar_edicao)
-            btn_confirmar.grid(row=3, column=0)
+            btn_confirmar.grid(row=3, column=0, columnspan=2)
 
     def confirmar_edicao(self):
         nome = self.ent_nome.get()
@@ -52,6 +53,8 @@ class Conta:
     def cadastrar(self):
 
         self.top_cadastrar = Toplevel()
+        self.top_cadastrar.geometry('200x200')
+        self.top_cadastrar.wm_iconbitmap('poggiebank.ico')
         self.top_cadastrar.grab_set()
         lbl_nome = Label(self.top_cadastrar, text='Nome:')
         lbl_nome.grid(row=0, column=0)
@@ -103,6 +106,8 @@ class Conta:
         self.tvw.column('email', minwidth=300, width=300)
         # Linhas
 
+        self.tvw.insert('', 'end', values=['Admin', 'admin', 'admin@admin.com'])
+
         # Barra de rolagem
         scb = Scrollbar(self.frameconta, orient=VERTICAL, command=self.tvw.yview)
         scb.place(x=700, y=101, height=125)
@@ -123,6 +128,6 @@ cliente = 2
 saldo = 50
 
 app = Tk()
-janela = Conta(app, numero, cliente, saldo)
 app.wm_iconbitmap('poggiebank.ico')
+janela = Conta(app, numero, cliente, saldo)
 app.mainloop()
