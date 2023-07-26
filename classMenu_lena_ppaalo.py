@@ -14,7 +14,7 @@ class MenuPrincipal:
 
     def entrar(self):
         self.janela_menu.deiconify()
-        import classBanco_lena_ppaalo
+        import main
 
     def disable_event(self):
         pass
