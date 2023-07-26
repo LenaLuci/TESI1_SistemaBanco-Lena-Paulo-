@@ -1,29 +1,25 @@
-from tkinter import *
+import tkinter as tk
+from banco.banco import Banco
+from cliente.cliente import Cliente
+from conta.conta import Conta
+from widget.criar_conta_widget import CriarContaWidget
+from widget.atualizar_banco_widget import AtualizarBancoWidget
+from widget.mostrar_contas_widget import MostrarContasWidget
+from widget.cadastro_conta_widget import CadastroContaWidget
 
-from PIL import Image
+def main():
+    root = tk.Tk()
+    root.wm_iconbitmap('poggiebank.ico')
+    root.title("PoggieBank - Seu porquinho virtual")
 
+    banco = Banco(1, "Banco Exemplo")
 
-class Banco:
+    criar_conta_widget = CriarContaWidget(root, banco)
+    atualizar_banco_widget = AtualizarBancoWidget(root, banco)
+    mostrar_contas_widget = MostrarContasWidget(root, banco)
+    cadastro_conta_widget = CadastroContaWidget(root, banco)
 
-    def __init__(self, master: Tk, numero, nome):
-        self.janelaLogin = master
-        self.janelaLogin.title('PoggieBank - Seu porquinho virtual')
-        self.janelaLogin.geometry('500x500')
-        self.janelaLogin.resizable(width=False, height=False)
-        self.janelaLogin.__numero = numero
-        self.janelaLogin.__nome = nome
-        self.janelaLogin.__contas = []
+    root.mainloop()
 
-
-        self.imagem = PhotoImage(file='imagens/poggiebank logo 250x250.png')
-        imagem_red = self.imagem.subsample(3, 3)
-        lbl = Label(image=self.imagem, bg='#3366cc')
-        lbl.place(x=125, y=50)
-
-
-numero = 1
-nome = ''
-banco = Tk()
-janela = Banco(banco, numero, nome)
-banco.wm_iconbitmap('imagens/poggiebank.ico')
-banco.mainloop()
+if __name__ == "__main__":
+    main()

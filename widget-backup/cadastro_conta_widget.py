@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
-from banco import Cliente, Conta
+from classbanco.banco import Conta
+from classbanco.cliente import Cliente
 
 class CadastroContaWidget(tk.Toplevel):
     def __init__(self, parent, banco):
@@ -30,7 +31,7 @@ class CadastroContaWidget(tk.Toplevel):
         label_saldo_inicial = tk.Label(self, text="Saldo Inicial:")
         label_saldo_inicial.pack()
 
-        self.entry_saldo_inicial = tk.Entry(self, state="disabled")
+        self.entry_saldo_inicial = tk.Entry(self)#, state="disabled")
         self.entry_saldo_inicial.pack()
 
         button_cadastrar = tk.Button(self, text="Cadastrar", command=self.cadastrar_conta)

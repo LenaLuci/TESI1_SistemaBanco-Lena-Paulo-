@@ -1,4 +1,4 @@
-from cliente import Cliente
+from cliente.cliente import Cliente
 
 class Banco:
     def __init__(self, numero, nome):
@@ -6,6 +6,12 @@ class Banco:
         self.__nome = nome
         self.__contas = []
         self.__clientes = {}
+
+    def adicionar_conta(self, conta):
+        self.__contas.append(conta)
+
+    def obter_contas(self):
+        return self.__contas
 
     def criar_conta_poupanca(self, numero, titular, saldo_inicial, taxa_juros):
         cliente = self.buscar_cliente_por_cpf(titular)
