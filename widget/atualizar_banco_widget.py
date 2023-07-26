@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from banco.banco import Banco
 
 
 class AtualizarBancoWidget(tk.Toplevel):
@@ -35,6 +36,16 @@ class AtualizarBancoWidget(tk.Toplevel):
         self.entry_nome_banco = tk.Entry(frame_principal)
         self.entry_nome_banco.pack(anchor=tk.CENTER)
 
+        label_juros_banco = tk.Label(frame_principal, text="Taxa de Juros:")
+        label_juros_banco.pack(anchor=tk.CENTER)
+        self.entry_juros_banco = tk.Entry(frame_principal)
+        self.entry_juros_banco.pack(anchor=tk.CENTER)
+
+        label_desconto_banco = tk.Label(frame_principal, text="Desconto:")
+        label_desconto_banco.pack(anchor=tk.CENTER)
+        self.entry_desconto_banco = tk.Entry(frame_principal)
+        self.entry_desconto_banco.pack(anchor=tk.CENTER)
+
         label_fill2 = tk.Label(frame_principal, text='\n', bg='#3366cc')
         label_fill2.pack(anchor=tk.CENTER)
 
@@ -42,10 +53,11 @@ class AtualizarBancoWidget(tk.Toplevel):
         button_atualizar_banco.pack(anchor=tk.CENTER)
 
     def atualizar_banco(self):
-        novo_numero = self.entry_numero_banco.get()
-        novo_nome = self.entry_nome_banco.get()
+        juros = float(self.entry_juros_banco.get())
+        desconto = float(self.entry_desconto_banco.get())
 
-        self.banco.set_numero(novo_numero)
-        self.banco.set_nome(novo_nome)
+        self.banco.set_juros(juros)
+        self.banco.set_desconto(desconto)
 
-        messagebox.showinfo("Atualização do Banco", "Informações do banco atualizadas com sucesso!")
+        messagebox.showinfo("Atualização de Banco", "Informações do banco atualizadas com sucesso!")
+        self.destroy()

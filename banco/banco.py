@@ -1,11 +1,14 @@
 from cliente.cliente import Cliente
+from conta.conta import ContaPoupanca
 
 class Banco:
-    def __init__(self, numero, nome):
-        self.__num = numero
+    def __init__(self, numero, nome, juros=0, desconto=0):
+        self.__numero = numero
         self.__nome = nome
         self.__contas = []
         self.__clientes = {}
+        self.__juros = juros
+        self.__desconto = desconto
 
     def adicionar_conta(self, conta):
         self.__contas.append(conta)
@@ -13,7 +16,7 @@ class Banco:
     def obter_contas(self):
         return self.__contas
 
-    def criar_conta_poupanca(self, numero, titular, saldo_inicial, taxa_juros):
+    def criar_conta_poupanca(self, numero, titular, saldo_inicial):
         cliente = self.buscar_cliente_por_cpf(titular)
         if cliente:
             cliente.vincular_conta(numero)
@@ -22,7 +25,7 @@ class Banco:
             cliente.vincular_conta(numero)
             self.__clientes[titular] = cliente
 
-    def criar_conta_corrente(self, numero, titular, saldo_inicial, desconto):
+    def criar_conta_corrente(self, numero, titular, saldo_inicial):
         cliente = self.buscar_cliente_por_cpf(titular)
         if cliente:
             cliente.vincular_conta(numero)
@@ -45,3 +48,11 @@ class Banco:
                 print("Cliente removido com sucesso.")
         else:
             print("Cliente não encontrado.")
+            
+    def aplicar_juros(self):
+        for conta in self.__contas:
+            if isinstance(conta, ContaPoupanca):
+                conta.depositar(conta.get_saldo() * self.__juros)
+
+    def aplicar_desconto(self, valor):
+        return valor - (valor * self.__desconto)

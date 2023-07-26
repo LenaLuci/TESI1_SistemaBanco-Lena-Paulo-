@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from banco.banco import Banco
 
 class CriarBancoWidget(tk.Toplevel):
     def __init__(self, parent, banco):
@@ -28,19 +29,21 @@ class CriarBancoWidget(tk.Toplevel):
         self.entry_juros_banco = tk.Entry(self)
         self.entry_juros_banco.pack()
 
-        label_desconto_banco = tk.Label(self, text="Número:")
-        label_numero_banco.pack()
-        self.entry_numero_banco = tk.Entry(self)
-        self.entry_numero_banco.pack()
+        label_desconto_banco = tk.Label(self, text="Desconto:")
+        label_desconto_banco.pack()
+        self.entry_desconto_banco = tk.Entry(self)
+        self.entry_desconto_banco.pack()
 
-        button_atualizar_banco = tk.Button(self, text="Atualizar Banco", command=self.atualizar_banco)
-        button_atualizar_banco.pack()
+        button_criar_banco = tk.Button(self, text="Criar Banco", command=self.criar_banco)
+        button_criar_banco.pack()
 
-    def atualizar_banco(self):
-        novo_numero = self.entry_numero_banco.get()
-        novo_nome = self.entry_nome_banco.get()
+    def criar_banco(self):
+        numero = self.entry_numero_banco.get()
+        nome = self.entry_nome_banco.get()
+        juros = float(self.entry_juros_banco.get())
+        desconto = float(self.entry_desconto_banco.get())
 
-        self.banco.set_numero(novo_numero)
-        self.banco.set_nome(novo_nome)
+        banco = Banco(numero, nome, juros, desconto)
 
-        messagebox.showinfo("Atualização do Banco", "Informações do banco atualizadas com sucesso!")
+        messagebox.showinfo("Cadastro de Banco", "Banco criado com sucesso!")
+        self.destroy()

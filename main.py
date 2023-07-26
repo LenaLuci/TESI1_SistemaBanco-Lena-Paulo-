@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from banco.banco import Banco
+from widget.mostrar_banco_widget import MostrarBancoWidget
 from widget.criar_conta_widget import CriarContaWidget
 from widget.atualizar_banco_widget import AtualizarBancoWidget
 from widget.mostrar_contas_widget import MostrarContasWidget
@@ -52,6 +53,7 @@ def main():
     cliente.add_command(label="Desativar Cliente")  # command=lambda: CadastroContaWidget(root, banco))
 
     bancos.add_command(label="Criar Banco", command=lambda: CriarBancoWidget(root, banco))
+    bancos.add_command(label="Mostrar Bancos", command=lambda: MostrarBancoWidget(root, banco))
     bancos.add_command(label="Atualizar Banco", command=lambda: AtualizarBancoWidget(root, banco))
 
     bancos.add_separator()
