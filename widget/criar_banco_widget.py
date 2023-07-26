@@ -5,6 +5,9 @@ class CriarBancoWidget(tk.Toplevel):
     def __init__(self, parent, banco):
         super().__init__(parent)
         self.title("Criar Banco")
+        self.geometry('200x300')
+
+        self.wm_iconbitmap('poggiebank.ico')
 
         self.banco = banco
 

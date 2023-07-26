@@ -3,12 +3,15 @@ from tkinter import messagebox
 from conta.conta import Conta
 from cliente.cliente import Cliente
 
+
 class CadastroContaWidget(tk.Toplevel):
     def __init__(self, parent, banco):
         print("CadastroContaWidget init - parent:", parent)  # depuração
         super().__init__(parent)
         self.title("Nova Conta")
         self.banco = banco
+
+        self.wm_iconbitmap('poggiebank.ico')
 
         label_nome_cliente = tk.Label(self, text="Nome do Cliente:")
         label_nome_cliente.pack()
