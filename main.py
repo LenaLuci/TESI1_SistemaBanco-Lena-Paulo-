@@ -4,6 +4,8 @@ from banco.banco import Banco
 from widget.criar_conta_widget import CriarContaWidget
 from widget.atualizar_banco_widget import AtualizarBancoWidget
 from widget.mostrar_contas_widget import MostrarContasWidget
+from widget.cadastro_conta_widget import CadastroContaWidget
+from widget.criar_banco_widget import CriarBancoWidget
 from tkinter import PhotoImage
 
 
@@ -11,6 +13,7 @@ def sair():
     resposta = messagebox.askyesno("Saindo da sessão", "Deseja encerrar a sessão atual?")
     if resposta is True:
         root.destroy()
+
 
 def main():
     global root
@@ -37,15 +40,27 @@ def main():
     menu_bar = tk.Menu(root)
     root.config(menu=menu_bar)
 
-    file_menu = tk.Menu(menu_bar, tearoff=0)
-    file_menu.add_command(label="Criar Conta", command=lambda: CriarContaWidget(root, banco))
-    file_menu.add_command(label="Atualizar Banco", command=lambda: AtualizarBancoWidget(root, banco))
-    file_menu.add_command(label="Mostrar Contas", command=lambda: MostrarContasWidget(root, banco))
-    file_menu.add_separator()
-    file_menu.add_command(label="Sair", command=sair)
-    menu_bar.add_cascade(label="Operacoes", menu=file_menu)
+    bancos = tk.Menu(menu_bar, tearoff=0)
+    cliente = tk.Menu(menu_bar, tearoff=0)
+    contas = tk.Menu(menu_bar, tearoff=0)
 
-    #file_menu.bind('<Control-Button-1>', root.withdraw())
+    contas.add_command(label="Criar Conta", command=lambda: CriarContaWidget(root, banco))
+    contas.add_command(label="Mostrar Contas", command=lambda: MostrarContasWidget(root, banco))
+    contas.add_command(label="Encerrar Conta", command=lambda: CriarContaWidget(root, banco))
+
+    cliente.add_command(label="Cadastrar Cliente", command=lambda: CadastroContaWidget(root, banco))
+    cliente.add_command(label="Desativar Cliente")  # command=lambda: CadastroContaWidget(root, banco))
+
+    bancos.add_command(label="Criar Banco", command=lambda: CriarBancoWidget(root, banco))
+    bancos.add_command(label="Atualizar Banco", command=lambda: AtualizarBancoWidget(root, banco))
+
+    bancos.add_separator()
+    bancos.add_command(label="Sair", command=sair)
+    menu_bar.add_cascade(label="Banco", menu=bancos)
+    menu_bar.add_cascade(label='Clientes', menu=cliente)
+    menu_bar.add_cascade(label="Contas", menu=contas)
+
+    # file_menu.bind('<Control-Button-1>', root.withdraw())
 
     root.mainloop()
 
