@@ -1,11 +1,11 @@
 import tkinter as tk
 from tkinter import messagebox
 from banco.banco import Banco
-from widget.mostrar_banco_widget import MostrarBancoWidget
+from widget.mostrar_bancos_widget import MostrarBancosWidget
 from widget.criar_conta_widget import CriarContaWidget
 from widget.mostrar_contas_widget import MostrarContasWidget
 from widget.cadastro_cliente_widget import CadastroClienteWidget
-from widget.criar_banco_widget import CriarBancoWidget
+from widget.cadastro_banco_widget import CadastroBancoWidget
 from widget.mostrar_cliente_widget import MostrarClientesWidget
 from tkinter import PhotoImage
 
@@ -36,7 +36,9 @@ def main():
     lbl_sloganbanco = tk.Label(text='O cofrinho virtual mais Pog do mundo', font='Arial, 10', bg='#3366cc', fg='white')
     lbl_sloganbanco.place(x=62, y=300)
 
-    banco = Banco(1, "Banco Exemplo")
+    lista_bancos = []
+    banco = Banco(1, "PoggieBank", 0.05, 0.01)
+    lista_bancos.append(banco)
 
     cliente1 = banco.criar_cliente("Paulo", "12345678900", "Rio Branco, Acre")
     cliente2 = banco.criar_cliente("Leona", "98765432100", "Cruzeiro do Sul, Acre")
@@ -54,15 +56,13 @@ def main():
     cliente.add_command(label="Cadastrar Clientes", command=lambda: CadastroClienteWidget(root, banco))
     cliente.add_command(label="Listar Clientes", command=lambda: MostrarClientesWidget(root, banco))
 
-    bancos.add_command(label="Cadastrar Bancos", command=lambda: CriarBancoWidget(root, banco))
-    bancos.add_command(label="Mostrar Bancos", command=lambda: MostrarBancoWidget(root, banco))
+    bancos.add_command(label="Cadastrar Bancos", command=lambda: CadastroBancoWidget(root, lista_bancos))
+    bancos.add_command(label="Mostrar Bancos", command=lambda: MostrarBancosWidget(root, lista_bancos))
 
     menu_bar.add_cascade(label="Bancos", menu=bancos)
     menu_bar.add_cascade(label='Clientes', menu=cliente)
     menu_bar.add_cascade(label="Contas", menu=contas)
     menu_bar.add_command(label="Sair", command=sair)
-
-    # file_menu.bind('<Control-Button-1>', root.withdraw())
 
     root.mainloop()
 

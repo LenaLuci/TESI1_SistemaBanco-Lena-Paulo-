@@ -1,5 +1,6 @@
 from cliente.cliente import Cliente
 from conta.conta import ContaPoupanca
+
 class Banco:
     def __init__(self, numero, nome, juros=0, desconto=0):
         self.__numero = numero
@@ -7,6 +8,27 @@ class Banco:
         self.__contas = []
         self.__clientes = {}
         self.__juros = juros
+        self.__desconto = desconto
+
+    def get_numero(self):
+        return self.__numero
+
+    def get_nome(self):
+        return self.__nome
+    
+    def set_nome(self, nome):
+        self.__nome = nome
+
+    def get_juros(self):
+        return self.__juros
+    
+    def set_juros(self, juros):
+        self.__juros = juros
+
+    def get_desconto(self):
+        return self.__desconto
+    
+    def set_desconto(self, desconto):
         self.__desconto = desconto
 
     def adicionar_conta(self, conta):
