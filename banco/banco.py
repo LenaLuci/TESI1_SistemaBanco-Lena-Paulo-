@@ -1,6 +1,5 @@
 from cliente.cliente import Cliente
 from conta.conta import ContaPoupanca
-
 class Banco:
     def __init__(self, numero, nome, juros=0, desconto=0):
         self.__numero = numero
@@ -12,6 +11,16 @@ class Banco:
 
     def adicionar_conta(self, conta):
         self.__contas.append(conta)
+
+    def criar_cliente(self, nome, cpf, endereco):
+        cliente = Cliente(nome, endereco, cpf)
+        self.__clientes[cpf] = cliente
+
+    def adicionar_cliente(self, cliente):
+        self.__clientes[cliente.get_cpf()] = cliente  # Store cliente object with CPF as the key
+
+    def obter_clientes(self):
+        return list(self.__clientes.values())
 
     def obter_contas(self):
         return self.__contas

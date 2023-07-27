@@ -3,10 +3,10 @@ from tkinter import messagebox
 from banco.banco import Banco
 from widget.mostrar_banco_widget import MostrarBancoWidget
 from widget.criar_conta_widget import CriarContaWidget
-from widget.atualizar_banco_widget import AtualizarBancoWidget
 from widget.mostrar_contas_widget import MostrarContasWidget
-from widget.cadastro_conta_widget import CadastroContaWidget
+from widget.cadastro_cliente_widget import CadastroClienteWidget
 from widget.criar_banco_widget import CriarBancoWidget
+from widget.mostrar_cliente_widget import MostrarClientesWidget
 from tkinter import PhotoImage
 
 
@@ -38,6 +38,9 @@ def main():
 
     banco = Banco(1, "Banco Exemplo")
 
+    cliente1 = banco.criar_cliente("Paulo", "12345678900", "Rio Branco, Acre")
+    cliente2 = banco.criar_cliente("Leona", "98765432100", "Cruzeiro do Sul, Acre")
+
     menu_bar = tk.Menu(root)
     root.config(menu=menu_bar)
 
@@ -47,20 +50,17 @@ def main():
 
     contas.add_command(label="Criar Conta", command=lambda: CriarContaWidget(root, banco))
     contas.add_command(label="Mostrar Contas", command=lambda: MostrarContasWidget(root, banco))
-    contas.add_command(label="Encerrar Conta", command=lambda: CriarContaWidget(root, banco))
 
-    cliente.add_command(label="Cadastrar Cliente", command=lambda: CadastroContaWidget(root, banco))
-    cliente.add_command(label="Desativar Cliente")  # command=lambda: CadastroContaWidget(root, banco))
+    cliente.add_command(label="Cadastrar Clientes", command=lambda: CadastroClienteWidget(root, banco))
+    cliente.add_command(label="Listar Clientes", command=lambda: MostrarClientesWidget(root, banco))
 
-    bancos.add_command(label="Criar Banco", command=lambda: CriarBancoWidget(root, banco))
+    bancos.add_command(label="Cadastrar Bancos", command=lambda: CriarBancoWidget(root, banco))
     bancos.add_command(label="Mostrar Bancos", command=lambda: MostrarBancoWidget(root, banco))
-    bancos.add_command(label="Atualizar Banco", command=lambda: AtualizarBancoWidget(root, banco))
 
-    bancos.add_separator()
-    bancos.add_command(label="Sair", command=sair)
-    menu_bar.add_cascade(label="Banco", menu=bancos)
+    menu_bar.add_cascade(label="Bancos", menu=bancos)
     menu_bar.add_cascade(label='Clientes', menu=cliente)
     menu_bar.add_cascade(label="Contas", menu=contas)
+    menu_bar.add_command(label="Sair", command=sair)
 
     # file_menu.bind('<Control-Button-1>', root.withdraw())
 

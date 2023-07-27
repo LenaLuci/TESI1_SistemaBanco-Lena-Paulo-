@@ -48,3 +48,7 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
+banco/__pycache__/
+__pycache__/
+cliente/__pycache__/
+conta/__pycache__/
