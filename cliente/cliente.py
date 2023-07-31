@@ -1,8 +1,8 @@
 class Cliente:
-    def __init__(self, n, e, cpf):
+    def __init__(self, n, cpf, e):
         self.__nome = n
-        self.__endereco = e
         self.__CPF = cpf
+        self.__endereco = e
         self.__vinculado_conta = False
         self.__contas_associadas = []
 
