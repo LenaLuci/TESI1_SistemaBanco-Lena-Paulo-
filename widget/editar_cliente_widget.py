@@ -17,7 +17,7 @@ class EditarClienteWidget(tk.Toplevel):
 
         label_cpf = tk.Label(self, text="CPF:")
         label_cpf.pack()
-        self.entry_cpf = tk.Entry(self, state=tk.DISABLED)
+        self.entry_cpf = tk.Entry(self)
         self.entry_cpf.pack()
         self.entry_cpf.insert(0, cliente.get_cpf())
 
@@ -32,6 +32,7 @@ class EditarClienteWidget(tk.Toplevel):
 
     def salvar_edicao(self):
         nome = self.entry_nome.get()
+        cpf = self.entry_cpf.get()
         endereco = self.entry_endereco.get()
 
         if not nome or not endereco:
@@ -39,6 +40,7 @@ class EditarClienteWidget(tk.Toplevel):
             return
 
         self.cliente.set_nome(nome)
+        self.cliente.set_cpf(cpf)
         self.cliente.set_endereco(endereco)
 
         messagebox.showinfo("Edição Salva", "Os dados do cliente foram atualizados com sucesso!")

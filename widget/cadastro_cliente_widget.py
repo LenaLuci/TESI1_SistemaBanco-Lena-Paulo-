@@ -1,13 +1,15 @@
 import tkinter as tk
 from tkinter import messagebox
+from cliente.cliente import Cliente
 
 class CadastroClienteWidget(tk.Toplevel):
-    def __init__(self, parent, banco):
+    def __init__(self, parent, banco, lista_clientes):
         super().__init__(parent)
         self.title("Cadastrar Cliente")
         self.geometry("400x200")
 
         self.banco = banco
+        self.lista_clientes = lista_clientes
 
         label_nome = tk.Label(self, text="Nome Completo:")
         label_nome.pack()
@@ -34,15 +36,14 @@ class CadastroClienteWidget(tk.Toplevel):
 
         if len(cpf) != 11:
             messagebox.showerror("Erro", "O CPF deve ter 11 dígitos.")
-            self.destroy()
             return
-        
-        clientes = self.banco.obter_clientes()
-        for cliente in clientes:
+    
+        for cliente in self.lista_clientes:
             if cliente.get_cpf() == cpf:
                 messagebox.showerror("Erro", "CPF já cadastrado.")
                 return
 
-        self.banco.criar_cliente(nome, cpf, endereco) 
+        cliente = Cliente(nome, cpf, endereco)
+        self.lista_clientes.append(cliente)
         messagebox.showinfo("Cadastro Efetuado", "Cliente cadastrado com sucesso!")
         self.destroy()

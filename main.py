@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from banco.banco import Banco
+from cliente.cliente import Cliente
 from widget.mostrar_bancos_widget import MostrarBancosWidget
 from widget.criar_conta_widget import CriarContaWidget
 from widget.mostrar_contas_widget import MostrarContasWidget
@@ -40,8 +41,12 @@ def main():
     banco = Banco(1, "PoggieBank", 0.05, 0.01)
     lista_bancos.append(banco)
 
-    cliente1 = banco.criar_cliente("Paulo", "12345678900", "Rio Branco, Acre")
-    cliente2 = banco.criar_cliente("Leona", "98765432100", "Cruzeiro do Sul, Acre")
+    lista_clientes = []
+
+    cliente1 = Cliente("Paulo", "12345678900", "Rio Branco, Acre")
+    cliente2 = Cliente("Leona", "98765432100", "Cruzeiro do Sul, Acre")
+    lista_clientes.append(cliente1)
+    lista_clientes.append(cliente2)
 
     menu_bar = tk.Menu(root)
     root.config(menu=menu_bar)
@@ -50,11 +55,11 @@ def main():
     cliente = tk.Menu(menu_bar, tearoff=0)
     contas = tk.Menu(menu_bar, tearoff=0)
 
-    contas.add_command(label="Criar Conta", command=lambda: CriarContaWidget(root, banco))
+    contas.add_command(label="Criar Conta", command=lambda: CriarContaWidget(root, lista_bancos, lista_clientes))
     contas.add_command(label="Mostrar Contas", command=lambda: MostrarContasWidget(root, banco))
 
-    cliente.add_command(label="Cadastrar Clientes", command=lambda: CadastroClienteWidget(root, banco))
-    cliente.add_command(label="Listar Clientes", command=lambda: MostrarClientesWidget(root, banco))
+    cliente.add_command(label="Cadastrar Clientes", command=lambda: CadastroClienteWidget(root, banco, lista_clientes))
+    cliente.add_command(label="Listar Clientes", command=lambda: MostrarClientesWidget(root, banco, lista_clientes))
 
     bancos.add_command(label="Cadastrar Bancos", command=lambda: CadastroBancoWidget(root, lista_bancos))
     bancos.add_command(label="Mostrar Bancos", command=lambda: MostrarBancosWidget(root, lista_bancos))
