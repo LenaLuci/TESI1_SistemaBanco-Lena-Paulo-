@@ -56,7 +56,7 @@ def main():
     contas = tk.Menu(menu_bar, tearoff=0)
 
     contas.add_command(label="Criar Conta", command=lambda: CriarContaWidget(root, lista_bancos, lista_clientes))
-    contas.add_command(label="Mostrar Contas", command=lambda: MostrarContasWidget(root, banco))
+    contas.add_command(label="Mostrar Contas", command=lambda: MostrarContasWidget(root, lista_bancos))
 
     cliente.add_command(label="Cadastrar Clientes", command=lambda: CadastroClienteWidget(root, banco, lista_clientes))
     cliente.add_command(label="Listar Clientes", command=lambda: MostrarClientesWidget(root, banco, lista_clientes))

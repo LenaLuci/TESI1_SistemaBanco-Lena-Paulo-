@@ -2,7 +2,7 @@ import random
 
 
 class Conta:
-    def __init__(self, cli, tipo_conta,sal=0):
+    def __init__(self, cli, tipo_conta, sal=0):
         self.__titular = cli
         self.__tipo_conta = tipo_conta
         self.__saldo = sal
@@ -13,10 +13,10 @@ class Conta:
 
     def get_numero(self):
         return self.__numero
-    
+
     def get_tipo_conta(self):
         return self.__tipo_conta
-    
+
     def get_juros(self):
         return self.__juros
 
@@ -66,6 +66,7 @@ class Conta:
             conta_destino.depositar(valor)
             return True
         return False
+
 
 class ContaPoupanca(Conta):
     def __init__(self, n, cli, sal, taxa_juros):

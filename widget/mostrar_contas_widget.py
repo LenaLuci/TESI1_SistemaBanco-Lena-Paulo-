@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 
 class MostrarContasWidget(tk.Toplevel):
-    def __init__(self, parent, banco):
+    def __init__(self, parent, lista_bancos):
         super().__init__(parent)
         self.title("Mostrar Contas")
         self.geometry("800x300")
@@ -10,7 +10,7 @@ class MostrarContasWidget(tk.Toplevel):
 
         self.wm_iconbitmap('poggiebank.ico')
 
-        self.banco = banco
+        self.lista_bancos = lista_bancos
 
         frame_principal = tk.Frame(self, width=400, height=300, bg='#3366cc')
         frame_principal.pack(fill=tk.BOTH, expand=True)
@@ -32,7 +32,6 @@ class MostrarContasWidget(tk.Toplevel):
 
     def populate_contas(self):
         self.conta_list.delete(*self.conta_list.get_children())
-        for conta in self.banco.obter_contas():
-            self.conta_list.insert("", "end", values=(conta.get_numero(), self.banco.get_nome(), conta.get_tipo_conta(), conta.get_titular().get_nome(), f"R$ {conta.get_saldo():.2f}"))
-
-
+        for banco in self.lista_bancos:
+            for conta in banco.obter_contas():
+                self.conta_list.insert("", "end", values=(banco.get_nome(), conta.get_numero(), conta.get_tipo_conta(), conta.get_titular().get_nome(), f"R$ {conta.get_saldo():.2f}"))

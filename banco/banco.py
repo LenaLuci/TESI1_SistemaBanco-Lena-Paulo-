@@ -1,6 +1,7 @@
 from cliente.cliente import Cliente
 from conta.conta import ContaPoupanca
 
+
 class Banco:
     def __init__(self, numero, nome, juros=0, desconto=0):
         self.__numero = numero
@@ -15,19 +16,19 @@ class Banco:
 
     def get_nome(self):
         return self.__nome
-    
+
     def set_nome(self, nome):
         self.__nome = nome
 
     def get_juros(self):
         return self.__juros
-    
+
     def set_juros(self, juros):
         self.__juros = juros
 
     def get_desconto(self):
         return self.__desconto
-    
+
     def set_desconto(self, desconto):
         self.__desconto = desconto
 
@@ -80,7 +81,7 @@ class Banco:
 
     def buscar_cliente_por_cpf(self, cpf):
         return self.__clientes.get(cpf, None)
-    
+
     def remover_cliente(self, cpf):
         cliente = self.buscar_cliente_por_cpf(cpf)
         if cliente:
@@ -92,7 +93,7 @@ class Banco:
                 print("Cliente removido com sucesso.")
         else:
             print("Cliente não encontrado.")
-            
+
     def aplicar_juros(self):
         for conta in self.__contas:
             if isinstance(conta, ContaPoupanca):

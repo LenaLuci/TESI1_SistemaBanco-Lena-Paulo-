@@ -8,36 +8,45 @@ class CriarContaWidget(tk.Toplevel):
         super().__init__(parent)
         self.title("Criar Conta")
         self.geometry("400x300")
+        self.resizable(width=False, height=False)
+
+        self.wm_iconbitmap('poggiebank.ico')
 
         self.lista_bancos = lista_bancos
         self.lista_clientes = lista_clientes
 
-        self.titular_label = tk.Label(self, text="Titular:")
-        self.titular_label.pack()
+        frame_principal = tk.Frame(self, width=300, height=300, bg='#3366cc')
+        frame_principal.pack(fill=tk.BOTH, expand=True)
+
+        labelvazia = tk.Label(frame_principal, text='', bg='#3366cc')
+        labelvazia.pack(pady=5)
+
+        self.titular_label = tk.Label(frame_principal, text="Titular:", bg='#3366cc')
+        self.titular_label.pack(pady=3)
         self.titular_var = tk.StringVar()
-        self.titular_combobox = ttk.Combobox(self, textvariable=self.titular_var, values=[cliente.get_nome() for cliente in self.lista_clientes])
+        self.titular_combobox = ttk.Combobox(frame_principal, textvariable=self.titular_var, values=[cliente.get_nome() for cliente in self.lista_clientes])
         self.titular_combobox.pack()
 
-        label_banco = tk.Label(self, text="Banco:")
-        label_banco.pack()
+        label_banco = tk.Label(frame_principal, text="Banco:", bg='#3366cc')
+        label_banco.pack(pady=3)
         self.banco_var = tk.StringVar()
-        self.banco_combobox = ttk.Combobox(self, textvariable=self.banco_var)
+        self.banco_combobox = ttk.Combobox(frame_principal, textvariable=self.banco_var)
         self.banco_combobox['values'] = [banco.get_nome() for banco in self.lista_bancos]
         self.banco_combobox.pack()
 
-        label_tipo_conta = tk.Label(self, text="Tipo de Conta:")
-        label_tipo_conta.pack()
+        label_tipo_conta = tk.Label(frame_principal, text="Tipo de Conta:", bg='#3366cc')
+        label_tipo_conta.pack(pady=3)
         self.tipo_conta_var = tk.StringVar()
-        self.tipo_conta_combobox = ttk.Combobox(self, textvariable=self.tipo_conta_var, values=["Conta Poupança", "Conta Corrente"])
+        self.tipo_conta_combobox = ttk.Combobox(frame_principal, textvariable=self.tipo_conta_var, values=["Conta Poupança", "Conta Corrente"])
         self.tipo_conta_combobox.pack()
 
-        label_saldo = tk.Label(self, text="Saldo:")
-        label_saldo.pack()
-        self.saldo_entry = tk.Entry(self)
+        label_saldo = tk.Label(frame_principal, text="Saldo:", bg='#3366cc')
+        label_saldo.pack(pady=3)
+        self.saldo_entry = tk.Entry(frame_principal)
         self.saldo_entry.pack()
 
-        button_criar_conta = tk.Button(self, text="Criar Conta", command=self.criar_conta)
-        button_criar_conta.pack()
+        button_criar_conta = tk.Button(frame_principal, text="Criar Conta", command=self.criar_conta)
+        button_criar_conta.pack(pady=10)
 
 
 
