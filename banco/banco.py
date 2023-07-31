@@ -6,7 +6,7 @@ class Banco:
         self.__numero = numero
         self.__nome = nome
         self.__contas = []
-        self.__clientes = []
+        self.__clientes = {}
         self.__juros = juros
         self.__desconto = desconto
 
@@ -35,37 +35,30 @@ class Banco:
         self.__contas.append(conta)
 
     def criar_cliente(self, nome, cpf, endereco):
-        cliente = Cliente(nome, endereco, cpf)
-        self.__clientes[cpf] = cliente
+        cliente = Cliente(nome, cpf, endereco)
+        self.__clientes.append(cliente)
+        return cliente
 
-    def adicionar_cliente(self, cliente):
-        self.__clientes[cliente.get_cpf()] = cliente
+    def buscar_cliente_por_cpf(self, cpf):
+        for cliente in self.__clientes:
+            if cliente.get_cpf() == cpf:
+                return cliente
+        return None
+
+    def buscar_cliente_por_nome(self, nome):
+        for cliente in self.__clientes:
+            if cliente.get_nome() == nome:
+                return cliente
+        return None
 
     def obter_clientes(self):
         return list(self.__clientes.values())
 
     def obter_contas(self):
         return self.__contas
-    
-    def criar_cliente(self, nome, cpf, endereco):
-        cliente = Cliente(nome, cpf, endereco)
-        self.clientes.append(cliente)
-        return cliente
-
-    def buscar_cliente_por_cpf(self, cpf):
-        for cliente in self.clientes:
-            if cliente.get_cpf() == cpf:
-                return cliente
-        return None
 
     def get_clientes(self):
         return self.clientes
-
-    def get_cliente_por_nome(self, nome):
-        for cliente in self.clientes:
-            if cliente.get_nome() == nome:
-                return cliente
-        return None
 
     def criar_conta_poupanca(self, numero, titular, saldo_inicial):
         cliente = self.buscar_cliente_por_cpf(titular)
@@ -87,7 +80,7 @@ class Banco:
 
     def buscar_cliente_por_cpf(self, cpf):
         return self.__clientes.get(cpf, None)
-
+    
     def remover_cliente(self, cpf):
         cliente = self.buscar_cliente_por_cpf(cpf)
         if cliente:

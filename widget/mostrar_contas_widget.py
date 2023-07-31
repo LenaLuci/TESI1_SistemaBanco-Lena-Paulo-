@@ -5,35 +5,34 @@ class MostrarContasWidget(tk.Toplevel):
     def __init__(self, parent, banco):
         super().__init__(parent)
         self.title("Mostrar Contas")
-        self.geometry("410x300")
+        self.geometry("800x300")
         self.resizable(width=False, height=False)
 
         self.wm_iconbitmap('poggiebank.ico')
 
         self.banco = banco
 
-        frame_principal = tk.Frame(self, width=300, height=300, bg='#3366cc')
+        frame_principal = tk.Frame(self, width=400, height=300, bg='#3366cc')
         frame_principal.pack(fill=tk.BOTH, expand=True)
 
-        labelvazia = tk.Label(frame_principal, text=' ', bg='#3366cc')
-        labelvazia.pack(pady=5)
+        self.conta_list = ttk.Treeview(frame_principal, columns=("Número", "Banco", "Tipo de Conta", "Titular", "Saldo"), show="headings")
+        self.conta_list.heading("Número", text="Número")
+        self.conta_list.column('Número', minwidth=50, width=70)
+        self.conta_list.heading("Banco", text="Banco")
+        self.conta_list.column("Banco", minwidth=100, width=150)
+        self.conta_list.heading("Tipo de Conta", text="Tipo de Conta")
+        self.conta_list.column('Tipo de Conta', minwidth=150, width=200)
+        self.conta_list.heading("Titular", text="Titular")
+        self.conta_list.column('Titular', minwidth=150, width=200)
+        self.conta_list.heading("Saldo", text="Saldo")
+        self.conta_list.column('Saldo', minwidth=100, width=150)
+        self.conta_list.pack(padx=10, pady=10, expand=True, fill=tk.BOTH)
 
-        self.account_list = ttk.Treeview(frame_principal, columns=("Número", "Titular", "Saldo"), show="headings")
-        self.account_list.heading("Número", text="Número")
-        self.account_list.column('Número', minwidth=120, width=120)
-        self.account_list.heading("Titular", text="Titular")
-        self.account_list.column('Titular', minwidth=120, width=120)
-        self.account_list.heading("Saldo", text="Saldo")
-        self.account_list.column('Saldo', minwidth=120, width=120)
-        self.account_list.pack()
+        self.populate_contas()
 
-        self.populate_accounts()
+    def populate_contas(self):
+        self.conta_list.delete(*self.conta_list.get_children())
+        for conta in self.banco.obter_contas():
+            self.conta_list.insert("", "end", values=(conta.get_numero(), self.banco.get_nome(), conta.get_tipo_conta(), conta.get_titular().get_nome(), f"R$ {conta.get_saldo():.2f}"))
 
-    def populate_accounts(self):
-        self.account_list.delete(*self.account_list.get_children())
 
-        contas = self.banco.obter_contas()
-        for conta in contas:
-            cliente_nome = conta._Conta__titular._Cliente__nome
-            saldo = conta._Conta__saldo
-            self.account_list.insert("", "end", values=(conta._Conta__numero, cliente_nome, saldo))
