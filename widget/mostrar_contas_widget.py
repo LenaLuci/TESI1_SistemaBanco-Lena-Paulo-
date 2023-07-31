@@ -6,6 +6,7 @@ class MostrarContasWidget(tk.Toplevel):
         super().__init__(parent)
         self.title("Mostrar Contas")
         self.geometry("410x300")
+        self.resizable(width=False, height=False)
 
         self.wm_iconbitmap('poggiebank.ico')
 
@@ -14,6 +15,9 @@ class MostrarContasWidget(tk.Toplevel):
         frame_principal = tk.Frame(self, width=300, height=300, bg='#3366cc')
         frame_principal.pack(fill=tk.BOTH, expand=True)
 
+        labelvazia = tk.Label(frame_principal, text=' ', bg='#3366cc')
+        labelvazia.pack(pady=5)
+
         self.account_list = ttk.Treeview(frame_principal, columns=("Número", "Titular", "Saldo"), show="headings")
         self.account_list.heading("Número", text="Número")
         self.account_list.column('Número', minwidth=120, width=120)
@@ -21,12 +25,9 @@ class MostrarContasWidget(tk.Toplevel):
         self.account_list.column('Titular', minwidth=120, width=120)
         self.account_list.heading("Saldo", text="Saldo")
         self.account_list.column('Saldo', minwidth=120, width=120)
-        self.account_list.pack(padx=10, pady=10, expand=True, fill=tk.BOTH)
+        self.account_list.pack()
 
         self.populate_accounts()
-
-        tvw_scbr = tk.Scrollbar(self.account_list, orient=tk.VERTICAL, width=10)
-        tvw_scbr.pack(side=tk.RIGHT, fill=tk.Y, expand=True)
 
     def populate_accounts(self):
         self.account_list.delete(*self.account_list.get_children())

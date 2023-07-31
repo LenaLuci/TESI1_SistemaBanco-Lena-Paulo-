@@ -7,6 +7,9 @@ class EditarBancoWidget(tk.Toplevel):
         super().__init__(parent)
         self.title("Editar Banco")
         self.geometry("400x200")
+        self.resizable(width=False, height=False)
+
+        self.wm_iconbitmap('poggiebank.ico')
 
         self.banco = banco
 

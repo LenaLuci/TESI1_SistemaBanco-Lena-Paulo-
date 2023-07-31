@@ -8,11 +8,17 @@ class MostrarClientesWidget(tk.Toplevel):
         super().__init__(parent)
         self.title("Mostrar Clientes")
         self.geometry("600x400")
+        self.resizable(width=False, height=False)
+
+        self.wm_iconbitmap('poggiebank.ico')
 
         self.banco = banco
         self.lista_clientes = lista_clientes
 
-        self.client_list = ttk.Treeview(self, columns=("Nome", "CPF", "Endereço"), show="headings")
+        frame_principal = tk.Frame(self, width=300, height=300, bg='#3366cc')
+        frame_principal.pack(fill=tk.BOTH, expand=True)
+
+        self.client_list = ttk.Treeview(frame_principal, columns=("Nome", "CPF", "Endereço"), show="headings")
         self.client_list.heading("Nome", text="Nome")
         self.client_list.column('Nome', minwidth=150, width=200)
         self.client_list.heading("CPF", text="CPF")
@@ -23,11 +29,11 @@ class MostrarClientesWidget(tk.Toplevel):
 
         self.populate_clients()
 
-        button_editar = tk.Button(self, text="Editar Cliente", command=self.editar_cliente)
-        button_editar.pack()
+        button_editar = tk.Button(frame_principal, text="Editar Cliente", command=self.editar_cliente)
+        button_editar.pack(side=tk.RIGHT, padx=10, pady=7)
 
-        delete_button = tk.Button(self, text="Excluir", command=self.excluir_cliente)
-        delete_button.pack()
+        delete_button = tk.Button(frame_principal, text="Excluir", command=self.excluir_cliente)
+        delete_button.pack(side=tk.RIGHT, padx=10, pady=7)
 
     def populate_clients(self):
         self.client_list.delete(*self.client_list.get_children())
@@ -58,7 +64,6 @@ class MostrarClientesWidget(tk.Toplevel):
         selected_item = self.client_list.selection()
         if not selected_item:
             messagebox.showwarning("Seleção Inválida", "Nenhum cliente selecionado.")
-            self.destroy()
             return
 
         item_id = selected_item[0]
@@ -76,5 +81,4 @@ class MostrarClientesWidget(tk.Toplevel):
         self.populate_clients()
 
         messagebox.showinfo("Cliente Excluído", f"O cliente '{nome}' foi excluído com sucesso.")
-        self.destroy()
 

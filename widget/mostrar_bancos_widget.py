@@ -9,10 +9,16 @@ class MostrarBancosWidget(tk.Toplevel):
         super().__init__(parent)
         self.title("Mostrar Bancos")
         self.geometry("600x400")
+        self.resizable(width=False, height=False)
+
+        self.wm_iconbitmap('poggiebank.ico')
+
+        frame_principal = tk.Frame(self, width=300, height=300, bg='#3366cc')
+        frame_principal.pack(fill=tk.BOTH, expand=True)
 
         self.lista_bancos = lista_bancos
 
-        self.banco_list = ttk.Treeview(self, columns=("Número", "Nome do Banco", "Taxa de Juros (%)", "Desconto (%)"), show="headings")
+        self.banco_list = ttk.Treeview(frame_principal, columns=("Número", "Nome do Banco", "Taxa de Juros (%)", "Desconto (%)"), show="headings")
         self.banco_list.heading("Número", text="Número")
         self.banco_list.column('Número', minwidth=50, width=70)
         self.banco_list.heading("Nome do Banco", text="Nome do Banco")
@@ -25,11 +31,11 @@ class MostrarBancosWidget(tk.Toplevel):
 
         self.populate_bancos()
 
-        button_excluir = tk.Button(self, text="Excluir", command=self.excluir_banco)
-        button_excluir.pack(side=tk.RIGHT, padx=10, pady=10)
+        button_excluir = tk.Button(frame_principal, text="Excluir", command=self.excluir_banco)
+        button_excluir.pack(side=tk.RIGHT, padx=10, pady=7)
 
-        button_editar = tk.Button(self, text="Editar", command=self.editar_banco)
-        button_editar.pack(side=tk.RIGHT, padx=10, pady=10)
+        button_editar = tk.Button(frame_principal, text="Editar", command=self.editar_banco)
+        button_editar.pack(side=tk.RIGHT, padx=10, pady=7)
 
     def populate_bancos(self):
         self.banco_list.delete(*self.banco_list.get_children())

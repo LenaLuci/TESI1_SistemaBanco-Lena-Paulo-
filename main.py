@@ -22,7 +22,7 @@ def main():
     root = tk.Tk()
     root.wm_iconbitmap('poggiebank.ico')
     root.title("PoggieBank - Seu porquinho virtual")
-    root.geometry('350x350')
+    root.geometry('450x350')
     root.resizable(width=False, height=False)
 
     frame_principal = tk.Frame(width=300, height=300, bg='#3366cc')
@@ -30,12 +30,12 @@ def main():
 
     imagem = PhotoImage(file='imagens/poggiebank logo 250x250.png')
     lbl = tk.Label(frame_principal, image=imagem, bg='#3366cc')
-    lbl.place(x=60, y=20)
+    lbl.place(x=100, y=20)
 
     lbl_titulobanco = tk.Label(text='PoggieBank', font='Arial', bg='#3366cc', fg='white')
-    lbl_titulobanco.place(x=125, y=275)
+    lbl_titulobanco.place(x=185, y=275)
     lbl_sloganbanco = tk.Label(text='O cofrinho virtual mais Pog do mundo', font='Arial, 10', bg='#3366cc', fg='white')
-    lbl_sloganbanco.place(x=62, y=300)
+    lbl_sloganbanco.place(x=120, y=300)
 
     lista_bancos = []
     banco = Banco(1, "PoggieBank", 0.05, 0.01)
