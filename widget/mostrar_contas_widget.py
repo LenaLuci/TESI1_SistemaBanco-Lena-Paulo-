@@ -15,11 +15,11 @@ class MostrarContasWidget(tk.Toplevel):
         frame_principal = tk.Frame(self, width=400, height=300, bg='#3366cc')
         frame_principal.pack(fill=tk.BOTH, expand=True)
 
-        self.conta_list = ttk.Treeview(frame_principal, columns=("Número", "Banco", "Tipo de Conta", "Titular", "Saldo"), show="headings")
-        self.conta_list.heading("Número", text="Número")
-        self.conta_list.column('Número', minwidth=50, width=70)
+        self.conta_list = ttk.Treeview(frame_principal, columns=("Banco", "Número", "Tipo de Conta", "Titular", "Saldo"), show="headings")
         self.conta_list.heading("Banco", text="Banco")
         self.conta_list.column("Banco", minwidth=100, width=150)
+        self.conta_list.heading("Número", text="Número")
+        self.conta_list.column('Número', minwidth=50, width=70)
         self.conta_list.heading("Tipo de Conta", text="Tipo de Conta")
         self.conta_list.column('Tipo de Conta', minwidth=150, width=200)
         self.conta_list.heading("Titular", text="Titular")
@@ -29,6 +29,12 @@ class MostrarContasWidget(tk.Toplevel):
         self.conta_list.pack(padx=10, pady=10, expand=True, fill=tk.BOTH)
 
         self.populate_contas()
+
+        button_editar = tk.Button(frame_principal, text="Editar Cliente")#, command=self.editar_cliente)
+        button_editar.pack(side=tk.RIGHT, padx=10, pady=7)
+
+        delete_button = tk.Button(frame_principal, text="Excluir")#, command=self.excluir_cliente)
+        delete_button.pack(side=tk.RIGHT, padx=10, pady=7)
 
     def populate_contas(self):
         self.conta_list.delete(*self.conta_list.get_children())

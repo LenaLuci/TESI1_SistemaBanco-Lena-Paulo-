@@ -44,7 +44,7 @@ class CadastroClienteWidget(tk.Toplevel):
         endereco = self.entry_endereco.get()
 
         if len(cpf) != 11:
-            messagebox.showerror("Erro", "O CPF deve ter 11 dígitos.")
+            messagebox.showerror("Erro", "Insira um CPF válido.")
             return
     
         for cliente in self.lista_clientes:
